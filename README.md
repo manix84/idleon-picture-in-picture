@@ -4,12 +4,21 @@ A Chrome extension for [Legends of Idleon](https://www.legendsofidleon.com/).
 
 ## What it does
 
-This extension adds a button to the top right of the Legends of Idleon website. Clicking the button moves the game into [Picture in Picture](https://developer.chrome.com/docs/web-platform/picture-in-picture) mode — a small floating window that stays visible on top of other applications. This lets you leave the game running active tasks while you continue to work or play something else.
+- Click the extension toolbar button to move `#content-container-inner` into a PiP window.
+- Click the extension again to close PiP and restore the content.
+- Returning to the original tab also closes PiP automatically.
+- The PiP window includes a small `Back to tab` button.
 
-## Installation
+## Important limitation
 
-1. Download or clone this repository.
-2. Open Chrome and navigate to `chrome://extensions`.
-3. Enable **Developer mode** (toggle in the top right).
-4. Click **Load unpacked** and select the repository folder.
-5. Visit [Legends of Idleon](https://www.legendsofidleon.com/) — the Picture in Picture button will appear in the top right of the page.
+Chrome's Document Picture-in-Picture API requires **user activation** when opening PiP. That means the extension can open PiP when you click the toolbar icon, but it cannot silently auto-open PiP just because the tab lost focus.
+
+## Install locally
+
+1. Open `chrome://extensions`
+2. Enable **Developer mode**
+3. Click **Load unpacked**
+4. Select this folder: `idleon-pip-extension`
+5. Pin the extension to your toolbar
+6. Open Legends of Idleon
+7. Click the extension icon to toggle PiP
