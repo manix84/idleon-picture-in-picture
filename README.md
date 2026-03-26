@@ -1,8 +1,6 @@
-# Idleon PiP Toggle
+# idleon-picture-in-picture
 
-Author: Rob Taylor <manix84@gmail.com>
-
-A Manifest V3 Chrome extension that opens the Legends of Idleon game area in Document Picture-in-Picture using the element with ID `content-container-inner`.
+A Chrome extension for [Legends of Idleon](https://www.legendsofidleon.com/).
 
 ## What it does
 
@@ -24,8 +22,3 @@ Chrome's Document Picture-in-Picture API requires **user activation** when openi
 5. Pin the extension to your toolbar
 6. Open Legends of Idleon
 7. Click the extension icon to toggle PiP
-
-## Notes
-
-- The extension currently **moves** the live DOM node into the PiP window instead of cloning it. This keeps the live game view intact better than cloning in many canvas-heavy apps.
-- The `author` key is included in the manifest because you asked for it, but modern Chrome ignores it.
