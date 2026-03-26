@@ -1,5 +1,7 @@
 # idleon-picture-in-picture
 
+[![Release Chrome Extension](https://github.com/manix84/idleon-picture-in-picture/actions/workflows/release-extension.yml/badge.svg)](https://github.com/manix84/idleon-picture-in-picture/actions/workflows/release-extension.yml)
+
 A Chrome extension for [Legends of Idleon](https://www.legendsofidleon.com/).
 
 ## What it does
