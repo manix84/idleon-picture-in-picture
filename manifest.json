@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Idleon PiP",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Open Legends of Idleon in Document Picture-in-Picture.",
   "author": "Rob Taylor <manix84@gmail.com>",
   "permissions": ["scripting", "activeTab"],
