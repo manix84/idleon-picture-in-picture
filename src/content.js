@@ -1,7 +1,9 @@
 (() => {
   const STATE_KEY = "__idleon_pip_state__";
   const BUTTON_ID = "__idleon_pip_button__";
+  const OVERLAY_ID = "__idleon_pip_overlay__";
   const MOVED_SELECTOR = "#content-container";
+  const HIDE_KEY = "__idleon_hide_button__";
 
   if (window[STATE_KEY]?.initialized) {
     window[STATE_KEY].ensureButton?.();
@@ -14,10 +16,13 @@
     placeholderNode: null,
     movedEl: null,
     originalInlineStyle: null,
-    buttonCheckTimer: null,
   };
 
   window[STATE_KEY] = state;
+
+  function shouldHideButton() {
+    return localStorage.getItem(HIDE_KEY) === "1";
+  }
 
   function getMovedElement() {
     return document.querySelector(MOVED_SELECTOR);
@@ -38,35 +43,50 @@
     btn.id = BUTTON_ID;
     btn.type = "button";
     btn.textContent = "Open Idleon PiP";
+    btn.title = "Open or close Picture-in-Picture for Idleon";
 
     Object.assign(btn.style, {
       position: "fixed",
-      top: "12px",
-      right: "12px",
+      bottom: "16px",
+      right: "16px",
       zIndex: "2147483647",
-      padding: "10px 14px",
-      borderRadius: "10px",
-      border: "none",
-      background: "#1f6feb",
+      padding: "8px 12px",
+      borderRadius: "8px",
+      border: "1px solid rgba(255,255,255,0.18)",
+      background: "rgba(31, 111, 235, 0.85)",
       color: "#fff",
-      fontSize: "14px",
+      backdropFilter: "blur(6px)",
+      WebkitBackdropFilter: "blur(6px)",
+      fontSize: "12px",
       fontWeight: "600",
-      cursor: "pointer",
-      boxShadow: "0 4px 16px rgba(0,0,0,0.35)",
       lineHeight: "1.2",
+      cursor: "pointer",
       userSelect: "none",
+      opacity: "0.8",
+      boxShadow: "0 4px 16px rgba(0,0,0,0.35)",
+      transition: "opacity 0.2s ease, transform 0.2s ease",
     });
 
     btn.addEventListener("mouseenter", () => {
-      btn.style.filter = "brightness(1.08)";
+      btn.style.opacity = "1";
+      btn.style.transform = "translateY(-1px)";
     });
 
     btn.addEventListener("mouseleave", () => {
-      btn.style.filter = "brightness(1)";
+      btn.style.opacity = "0.8";
+      btn.style.transform = "translateY(0)";
     });
 
     btn.addEventListener("click", () => {
       window.__idleonTogglePip?.();
+    });
+
+    btn.addEventListener("contextmenu", (event) => {
+      event.preventDefault();
+      localStorage.setItem(HIDE_KEY, "1");
+      btn.remove();
+      removeOverlay();
+      console.log("[Idleon PiP] Floating button hidden. Clear localStorage key to restore.");
     });
 
     return btn;
@@ -74,6 +94,7 @@
 
   function ensureButton() {
     if (!document.body) return;
+    if (shouldHideButton()) return;
 
     let btn = document.getElementById(BUTTON_ID);
     if (!btn) {
@@ -86,12 +107,66 @@
 
   state.ensureButton = ensureButton;
 
-  function startButtonKeeper() {
-    if (state.buttonCheckTimer) return;
-
-    state.buttonCheckTimer = window.setInterval(() => {
+  function waitForBodyAndInject() {
+    if (document.body) {
       ensureButton();
-    }, 1500);
+      return;
+    }
+
+    const observer = new MutationObserver(() => {
+      if (document.body) {
+        ensureButton();
+        observer.disconnect();
+      }
+    });
+
+    observer.observe(document.documentElement, {
+      childList: true,
+      subtree: true,
+    });
+  }
+
+  function showOverlay() {
+    if (!document.body) return;
+    if (document.getElementById(OVERLAY_ID)) return;
+
+    const overlay = document.createElement("div");
+    overlay.id = OVERLAY_ID;
+
+    Object.assign(overlay.style, {
+      position: "fixed",
+      inset: "0",
+      zIndex: "2147483646",
+      background: "rgba(0,0,0,0.55)",
+      color: "#fff",
+      display: "grid",
+      placeItems: "center",
+      pointerEvents: "none",
+      backdropFilter: "blur(2px)",
+      WebkitBackdropFilter: "blur(2px)",
+    });
+
+    const message = document.createElement("div");
+    Object.assign(message.style, {
+      padding: "14px 18px",
+      borderRadius: "12px",
+      background: "rgba(0,0,0,0.55)",
+      border: "1px solid rgba(255,255,255,0.12)",
+      boxShadow: "0 8px 24px rgba(0,0,0,0.35)",
+      fontFamily: "system-ui, sans-serif",
+      fontSize: "16px",
+      fontWeight: "600",
+      lineHeight: "1.3",
+      textAlign: "center",
+    });
+    message.textContent = "Game moved to Picture-in-Picture";
+
+    overlay.appendChild(message);
+    document.body.appendChild(overlay);
+  }
+
+  function removeOverlay() {
+    document.getElementById(OVERLAY_ID)?.remove();
   }
 
   function restoreOriginalStyles() {
@@ -129,6 +204,7 @@
       return;
     }
 
+    removeOverlay();
     restoreOriginalStyles();
     restoreMovedElement();
     state.pipWindow = null;
@@ -173,6 +249,11 @@
 
     if (!movedEl) {
       alert(`[Idleon PiP] Could not find ${MOVED_SELECTOR}`);
+      return;
+    }
+
+    if (!movedEl.parentNode) {
+      alert("[Idleon PiP] Game container has no parent node.");
       return;
     }
 
@@ -225,7 +306,6 @@
     state.movedEl = movedEl;
     state.originalInlineStyle = movedEl.getAttribute("style");
 
-    // Force the moved outer container to size itself relative to the PiP window.
     Object.assign(movedEl.style, {
       width: "100vw",
       height: "56.25vw",
@@ -242,7 +322,10 @@
     wrapper.appendChild(movedEl);
     pipDoc.body.replaceChildren(wrapper);
 
+    showOverlay();
+
     const handleClose = () => {
+      removeOverlay();
       restoreOriginalStyles();
       restoreMovedElement();
       state.pipWindow = null;
@@ -269,8 +352,7 @@
 
   window.__idleonTogglePip = togglePip;
 
-  ensureButton();
-  startButtonKeeper();
+  waitForBodyAndInject();
 
   console.log("[Idleon PiP] Ready.");
 })();
