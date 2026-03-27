@@ -1,75 +1,261 @@
 # Privacy Policy for Idleon PiP
 
-**Last updated:** 26th March 2026
+**Last updated:** 27th March 2026
+**Version:** 1.0.1
+
+---
 
 ## Overview
 
-Idleon PiP is a Chrome extension that enables Picture-in-Picture (PiP) functionality for the game *Legends of Idleon*. This extension is designed to operate entirely locally within your browser and does not collect, store, or transmit any personal data.
+Idleon PiP is a Chrome extension that enables Picture-in-Picture (PiP) functionality for the game _Legends of Idleon_.
+
+This extension is designed with privacy as a priority.
+
+👉 **Idleon PiP does NOT collect, store, transmit, or share any user data.**
+
+All functionality runs entirely within your browser.
 
 ---
 
 ## Data Collection
 
-Idleon PiP does **not collect any user data**.
+Idleon PiP does **not collect any data**, including:
 
-This includes, but is not limited to:
+- Personally identifiable information (name, email, etc.)
+- Browsing history
+- Website content
+- Cookies or authentication tokens
+- Financial or payment information
+- Health or sensitive data
+- User activity or analytics
 
-* Personally identifiable information (name, email address, etc.)
-* Browsing history
-* Website content
-* Authentication data (cookies, tokens, etc.)
-* Financial or payment information
-* Health or personal data
+There is **no tracking of any kind**.
+
+---
+
+## Local Storage Usage
+
+The extension uses **localStorage** for a single purpose:
+
+- To remember whether the floating PiP button has been hidden by the user
+
+This data:
+
+- is stored locally in your browser
+- is never transmitted anywhere
+- can be cleared at any time via browser settings
 
 ---
 
 ## How the Extension Works
 
-Idleon PiP operates by:
+Idleon PiP:
 
-* Accessing the currently active browser tab when the user clicks the extension icon
-* Injecting a local script into the *Legends of Idleon* webpage
-* Moving the game container into a Picture-in-Picture window using browser APIs
+1. Runs only on the _Legends of Idleon_ website
+2. Injects a local script into the page
+3. Moves the game container into a Picture-in-Picture window using browser APIs
+4. Restores the page when PiP is closed
 
-All processing happens locally within your browser. No data is sent to external servers.
+No data leaves your device at any time.
 
 ---
 
 ## Permissions Explained
 
-The extension uses the following permissions:
+Idleon PiP requires the following permissions:
 
-* **activeTab** — Allows the extension to interact with the currently active tab when explicitly triggered by the user.
-* **scripting** — Enables the extension to inject a script into the page to activate Picture-in-Picture functionality.
-* **Host permissions (legendsofidleon.com)** — Restricts the extension to only run on the Legends of Idleon website.
+### `activeTab`
 
-These permissions are used solely to provide the extension’s functionality and nothing more.
+Used to interact with the currently active tab when the user clicks the extension icon.
+
+### `scripting`
+
+Allows injection of the extension’s local script into the Idleon page.
+
+### Host permissions (`legendsofidleon.com`)
+
+Restricts the extension to only run on the Idleon website.
+
+👉 These permissions are used **only to provide PiP functionality**.
 
 ---
 
 ## Remote Code
 
-Idleon PiP does **not load or execute any remote code**. All code is bundled within the extension package.
+Idleon PiP does **not load or execute remote code**.
+
+All code is packaged within the extension.
 
 ---
 
 ## Data Sharing
 
-Idleon PiP does **not share any data** with third parties, because no data is collected in the first place.
+Idleon PiP does **not share any data** with third parties.
+
+There is nothing to share.
+
+---
+
+## User Controls
+
+Users can:
+
+- Open/close Picture-in-Picture mode
+- Hide the floating PiP button
+- Restore the button via keyboard shortcut
+- Use extension shortcuts or toolbar actions
+
+---
+
+## Browser Limitations
+
+Some features (such as automatic PiP activation or keyboard-triggered PiP) may be limited by browser security policies that require direct user interaction.
+
+These limitations are enforced by the browser and not by the extension.
 
 ---
 
 ## Changes to This Policy
 
-This privacy policy may be updated if the extension’s functionality changes. Any updates will be reflected in this document.
+This policy may be updated if the extension’s functionality changes.
+
+Any updates will be reflected in this document.
 
 ---
 
 ## Contact
 
-If you have any questions or concerns about this privacy policy, you can contact:
+If you have any questions:
 
 **Rob Taylor**
-[manix84@gmail.com](mailto:manix84@gmail.com)
+manix84@gmail.com# Privacy Policy for Idleon PiP
+
+**Last updated:** March 2026
+**Version:** 1.0.1
 
 ---
+
+## Overview
+
+Idleon PiP is a Chrome extension that enables Picture-in-Picture (PiP) functionality for the game _Legends of Idleon_.
+
+This extension is designed with privacy as a priority.
+
+👉 **Idleon PiP does NOT collect, store, transmit, or share any user data.**
+
+All functionality runs entirely within your browser.
+
+---
+
+## Data Collection
+
+Idleon PiP does **not collect any data**, including:
+
+- Personally identifiable information (name, email, etc.)
+- Browsing history
+- Website content
+- Cookies or authentication tokens
+- Financial or payment information
+- Health or sensitive data
+- User activity or analytics
+
+There is **no tracking of any kind**.
+
+---
+
+## Local Storage Usage
+
+The extension uses **localStorage** for a single purpose:
+
+- To remember whether the floating PiP button has been hidden by the user
+
+This data:
+
+- is stored locally in your browser
+- is never transmitted anywhere
+- can be cleared at any time via browser settings
+
+---
+
+## How the Extension Works
+
+Idleon PiP:
+
+1. Runs only on the _Legends of Idleon_ website
+2. Injects a local script into the page
+3. Moves the game container into a Picture-in-Picture window using browser APIs
+4. Restores the page when PiP is closed
+
+No data leaves your device at any time.
+
+---
+
+## Permissions Explained
+
+Idleon PiP requires the following permissions:
+
+### `activeTab`
+
+Used to interact with the currently active tab when the user clicks the extension icon.
+
+### `scripting`
+
+Allows injection of the extension’s local script into the Idleon page.
+
+### Host permissions (`legendsofidleon.com`)
+
+Restricts the extension to only run on the Idleon website.
+
+👉 These permissions are used **only to provide PiP functionality**.
+
+---
+
+## Remote Code
+
+Idleon PiP does **not load or execute remote code**.
+
+All code is packaged within the extension.
+
+---
+
+## Data Sharing
+
+Idleon PiP does **not share any data** with third parties.
+
+There is nothing to share.
+
+---
+
+## User Controls
+
+Users can:
+
+- Open/close Picture-in-Picture mode
+- Hide the floating PiP button
+- Restore the button via keyboard shortcut
+- Use extension shortcuts or toolbar actions
+
+---
+
+## Browser Limitations
+
+Some features (such as automatic PiP activation or keyboard-triggered PiP) may be limited by browser security policies that require direct user interaction.
+
+These limitations are enforced by the browser and not by the extension.
+
+---
+
+## Changes to This Policy
+
+This policy may be updated if the extension’s functionality changes.
+
+Any updates will be reflected in this document.
+
+---
+
+## Contact
+
+If you have any questions:
+
+**Rob Taylor**
+manix84@gmail.com

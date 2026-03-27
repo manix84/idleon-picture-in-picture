@@ -1,17 +1,21 @@
 {
   "manifest_version": 3,
   "name": "Idleon PiP",
-  "version": "0.2.2",
-  "description": "Open Legends of Idleon in Document Picture-in-Picture.",
+  "version": "1.0.1",
+  "description": "Play Legends of Idleon in Picture-in-Picture mode.",
   "author": "Rob Taylor <manix84@gmail.com>",
-  "permissions": ["scripting", "activeTab"],
+
+  "permissions": ["activeTab", "scripting"],
+
   "host_permissions": [
     "https://www.legendsofidleon.com/*",
     "https://*.legendsofidleon.com/*"
   ],
+
   "background": {
     "service_worker": "src/background.js"
   },
+
   "content_scripts": [
     {
       "matches": [
@@ -22,6 +26,7 @@
       "run_at": "document_idle"
     }
   ],
+
   "action": {
     "default_title": "Toggle Idleon PiP",
     "default_icon": {
@@ -31,10 +36,21 @@
       "128": "icons/icon128.png"
     }
   },
+
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
+  },
+
+  "commands": {
+    "toggle-pip": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y",
+        "mac": "Command+Shift+Y"
+      },
+      "description": "Reveal the Idleon PiP control"
+    }
   }
 }
