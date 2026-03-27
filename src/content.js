@@ -2,7 +2,11 @@
   const STATE_KEY = "__idleon_pip_state__";
   const BUTTON_ID = "__idleon_pip_button__";
   const OVERLAY_ID = "__idleon_pip_overlay__";
+  const TOAST_ID = "__idleon_pip_toast__";
+
   const MOVED_SELECTOR = "#content-container";
+  const INNER_SELECTOR = "#content-container-inner";
+
   const HIDE_KEY = "__idleon_hide_button__";
 
   if (window[STATE_KEY]?.initialized) {
@@ -13,9 +17,13 @@
   const state = {
     initialized: true,
     pipWindow: null,
+    pipMode: null, // "manual" | "auto" | null
     placeholderNode: null,
     movedEl: null,
     originalInlineStyle: null,
+    innerEl: null,
+    innerOriginalStyle: null,
+    blurAttemptedSinceVisible: false,
   };
 
   window[STATE_KEY] = state;
@@ -28,14 +36,15 @@
     return document.querySelector(MOVED_SELECTOR);
   }
 
+  function isPipOpen() {
+    return !!(state.pipWindow && !state.pipWindow.closed);
+  }
+
   function updateButton() {
     const btn = document.getElementById(BUTTON_ID);
     if (!btn) return;
 
-    btn.textContent =
-      state.pipWindow && !state.pipWindow.closed
-        ? "Close Idleon PiP"
-        : "Open Idleon PiP";
+    btn.textContent = isPipOpen() ? "Close Idleon PiP" : "Open Idleon PiP";
   }
 
   function createButton() {
@@ -43,7 +52,8 @@
     btn.id = BUTTON_ID;
     btn.type = "button";
     btn.textContent = "Open Idleon PiP";
-    btn.title = "Open or close Picture-in-Picture for Idleon";
+    btn.title =
+      "Open or close Picture-in-Picture for Idleon. Right-click to hide this button.";
 
     Object.assign(btn.style, {
       position: "fixed",
@@ -65,6 +75,7 @@
       opacity: "0.8",
       boxShadow: "0 4px 16px rgba(0,0,0,0.35)",
       transition: "opacity 0.2s ease, transform 0.2s ease",
+      fontFamily: "system-ui, sans-serif",
     });
 
     btn.addEventListener("mouseenter", () => {
@@ -78,15 +89,14 @@
     });
 
     btn.addEventListener("click", () => {
-      window.__idleonTogglePip?.();
+      window.__idleonTogglePip?.("manual");
     });
 
     btn.addEventListener("contextmenu", (event) => {
       event.preventDefault();
       localStorage.setItem(HIDE_KEY, "1");
       btn.remove();
-      removeOverlay();
-      console.log("[Idleon PiP] Floating button hidden. Clear localStorage key to restore.");
+      showToast("Idleon PiP button hidden. Press Ctrl/Cmd+Shift+P to restore.");
     });
 
     return btn;
@@ -158,8 +168,15 @@
       fontWeight: "600",
       lineHeight: "1.3",
       textAlign: "center",
+      maxWidth: "90vw",
     });
-    message.textContent = "Game moved to Picture-in-Picture";
+
+    message.innerHTML = `
+      <div>Game moved to Picture-in-Picture</div>
+      <div style="margin-top: 6px; font-size: 13px; font-weight: 400; opacity: 0.9;">
+        Close the PiP window to return the game to the page
+      </div>
+    `;
 
     overlay.appendChild(message);
     document.body.appendChild(overlay);
@@ -167,6 +184,151 @@
 
   function removeOverlay() {
     document.getElementById(OVERLAY_ID)?.remove();
+  }
+
+  function showToast(message = "Idleon PiP button restored") {
+    if (!document.body) return;
+
+    document.getElementById(TOAST_ID)?.remove();
+
+    const toast = document.createElement("div");
+    toast.id = TOAST_ID;
+    toast.textContent = message;
+
+    Object.assign(toast.style, {
+      position: "fixed",
+      bottom: "16px",
+      left: "16px",
+      zIndex: "2147483647",
+      padding: "8px 12px",
+      borderRadius: "8px",
+      background: "rgba(0,0,0,0.8)",
+      color: "#fff",
+      fontSize: "12px",
+      fontFamily: "system-ui, sans-serif",
+      boxShadow: "0 4px 16px rgba(0,0,0,0.35)",
+      opacity: "0",
+      transform: "translateY(10px)",
+      transition: "opacity 0.2s ease, transform 0.2s ease",
+      pointerEvents: "none",
+      maxWidth: "min(460px, calc(100vw - 32px))",
+    });
+
+    document.body.appendChild(toast);
+
+    requestAnimationFrame(() => {
+      toast.style.opacity = "1";
+      toast.style.transform = "translateY(0)";
+    });
+
+    window.setTimeout(() => {
+      toast.style.opacity = "0";
+      toast.style.transform = "translateY(10px)";
+
+      window.setTimeout(() => {
+        toast.remove();
+      }, 200);
+    }, 2600);
+  }
+
+  function pulseButton() {
+    const btn = document.getElementById(BUTTON_ID);
+    if (!btn) return;
+
+    const oldTransform = btn.style.transform;
+    const oldOpacity = btn.style.opacity;
+
+    btn.style.opacity = "1";
+    btn.style.transform = "scale(1.06)";
+
+    window.setTimeout(() => {
+      btn.style.transform = oldTransform || "translateY(0)";
+      btn.style.opacity = oldOpacity || "0.8";
+    }, 180);
+  }
+
+  function getReadablePipError(error, context = "open") {
+    const message = error?.message || String(error || "");
+    const name = error?.name || "";
+
+    if (
+      name === "NotAllowedError" ||
+      /requires user activation/i.test(message)
+    ) {
+      return {
+        title: "Chrome blocked Picture-in-Picture",
+        body:
+          context === "auto"
+            ? "Chrome only allows this PiP window to open after a direct user action, like clicking the PiP button or the extension icon. The extension is working, but the browser rejected the automatic open."
+            : "Chrome only allows this PiP window to open after a direct user action. Please try clicking the PiP button on the page or the extension icon.",
+      };
+    }
+
+    if (name === "NotSupportedError") {
+      return {
+        title: "Picture-in-Picture is not available",
+        body: "This browser or browser setting does not currently allow Document Picture-in-Picture on this page.",
+      };
+    }
+
+    return {
+      title: "Picture-in-Picture failed",
+      body: message || "Chrome rejected the PiP request for an unknown reason.",
+    };
+  }
+
+  function copyStylesToDocument(targetDoc) {
+    for (const sheet of Array.from(document.styleSheets)) {
+      try {
+        if (sheet.href) {
+          const link = targetDoc.createElement("link");
+          link.rel = "stylesheet";
+          link.href = sheet.href;
+          targetDoc.head.appendChild(link);
+        } else if (sheet.cssRules) {
+          const style = targetDoc.createElement("style");
+          style.textContent = Array.from(sheet.cssRules)
+            .map((rule) => rule.cssText)
+            .join("\n");
+          targetDoc.head.appendChild(style);
+        }
+      } catch {
+        // Ignore stylesheets we can't read, usually cross-origin.
+      }
+    }
+  }
+
+  function applyInnerOverrides() {
+    if (!state.movedEl) return;
+
+    const inner = state.movedEl.querySelector(INNER_SELECTOR);
+    if (!inner) return;
+
+    state.innerEl = inner;
+    state.innerOriginalStyle = inner.getAttribute("style");
+
+    Object.assign(inner.style, {
+      padding: "0",
+      margin: "0",
+      width: "100%",
+      height: "100%",
+      maxWidth: "100%",
+      maxHeight: "100%",
+      boxSizing: "border-box",
+    });
+  }
+
+  function restoreInnerOverrides() {
+    if (!state.innerEl) return;
+
+    if (state.innerOriginalStyle === null) {
+      state.innerEl.removeAttribute("style");
+    } else {
+      state.innerEl.setAttribute("style", state.innerOriginalStyle);
+    }
+
+    state.innerEl = null;
+    state.innerOriginalStyle = null;
   }
 
   function restoreOriginalStyles() {
@@ -198,74 +360,84 @@
     state.movedEl = null;
   }
 
+  function finishClose() {
+    removeOverlay();
+    restoreInnerOverrides();
+    restoreOriginalStyles();
+    restoreMovedElement();
+    state.pipWindow = null;
+    state.pipMode = null;
+    updateButton();
+  }
+
   function closePip() {
-    if (state.pipWindow && !state.pipWindow.closed) {
+    if (isPipOpen()) {
       state.pipWindow.close();
       return;
     }
 
-    removeOverlay();
-    restoreOriginalStyles();
-    restoreMovedElement();
-    state.pipWindow = null;
-    updateButton();
+    finishClose();
   }
 
-  function copyStylesToDocument(targetDoc) {
-    for (const sheet of Array.from(document.styleSheets)) {
-      try {
-        if (sheet.href) {
-          const link = targetDoc.createElement("link");
-          link.rel = "stylesheet";
-          link.href = sheet.href;
-          targetDoc.head.appendChild(link);
-        } else if (sheet.cssRules) {
-          const style = targetDoc.createElement("style");
-          style.textContent = Array.from(sheet.cssRules)
-            .map((rule) => rule.cssText)
-            .join("\n");
-          targetDoc.head.appendChild(style);
-        }
-      } catch (error) {
-        // Ignore stylesheets we can't read, usually cross-origin.
-      }
-    }
-  }
+  async function openPip(options = {}) {
+    const { mode = "manual", suppressErrors = false } = options;
 
-  async function openPip() {
     if (!("documentPictureInPicture" in window)) {
-      alert(
-        "[Idleon PiP] Document Picture-in-Picture is not supported in this browser."
-      );
-      return;
+      if (!suppressErrors) {
+        showToast(
+          "Document Picture-in-Picture is not supported in this browser."
+        );
+      }
+      return false;
     }
 
-    if (state.pipWindow && !state.pipWindow.closed) {
+    if (isPipOpen()) {
       state.pipWindow.focus();
-      return;
+      return true;
     }
 
     const movedEl = getMovedElement();
 
     if (!movedEl) {
-      alert(`[Idleon PiP] Could not find ${MOVED_SELECTOR}`);
-      return;
+      if (!suppressErrors) {
+        showToast(`Could not find ${MOVED_SELECTOR}`);
+      }
+      return false;
     }
 
     if (!movedEl.parentNode) {
-      alert("[Idleon PiP] Game container has no parent node.");
-      return;
+      if (!suppressErrors) {
+        showToast("Game container has no parent node.");
+      }
+      return false;
     }
 
     const rect = movedEl.getBoundingClientRect();
     const width = Math.max(720, Math.round(rect.width || 960));
     const height = Math.max(405, Math.round(rect.height || 540));
 
-    state.pipWindow = await window.documentPictureInPicture.requestWindow({
-      width,
-      height,
-      preferInitialWindowPlacement: true,
-    });
+    try {
+      state.pipWindow = await window.documentPictureInPicture.requestWindow({
+        width,
+        height,
+        preferInitialWindowPlacement: false,
+      });
+    } catch (error) {
+      const readable = getReadablePipError(
+        error,
+        mode === "auto" ? "auto" : "open"
+      );
+
+      console.warn("[Idleon PiP]", readable.title, error);
+
+      if (!suppressErrors) {
+        showToast(`${readable.title}: ${readable.body}`);
+      }
+
+      return false;
+    }
+
+    state.pipMode = mode;
 
     const pipDoc = state.pipWindow.document;
     pipDoc.title = "Idleon PiP";
@@ -319,38 +491,98 @@
       transformOrigin: "",
     });
 
+    applyInnerOverrides();
+
     wrapper.appendChild(movedEl);
     pipDoc.body.replaceChildren(wrapper);
 
     showOverlay();
 
     const handleClose = () => {
-      removeOverlay();
-      restoreOriginalStyles();
-      restoreMovedElement();
-      state.pipWindow = null;
-      updateButton();
+      finishClose();
     };
 
     state.pipWindow.addEventListener("pagehide", handleClose, { once: true });
 
     updateButton();
+    return true;
   }
 
-  async function togglePip() {
-    try {
-      if (state.pipWindow && !state.pipWindow.closed) {
+  async function togglePip(mode = "manual") {
+    if (isPipOpen()) {
+      closePip();
+      return;
+    }
+
+    await openPip({ mode });
+  }
+
+  function revealPipControl() {
+    if (isPipOpen()) {
+      closePip();
+      return;
+    }
+
+    localStorage.removeItem(HIDE_KEY);
+    ensureButton();
+    pulseButton();
+    showToast("Click the Idleon PiP button to open Picture-in-Picture");
+  }
+
+  function handleRestoreShortcut(event) {
+    const isCombo =
+      (event.ctrlKey || event.metaKey) &&
+      event.shiftKey &&
+      event.key.toLowerCase() === "p";
+
+    if (!isCombo) return;
+
+    event.preventDefault();
+
+    if (isPipOpen()) {
+      state.pipWindow?.focus();
+      return;
+    }
+
+    if (shouldHideButton()) {
+      localStorage.removeItem(HIDE_KEY);
+      ensureButton();
+      pulseButton();
+      showToast("Idleon PiP button restored");
+      return;
+    }
+
+    pulseButton();
+    showToast("Click the Idleon PiP button to open Picture-in-Picture");
+  }
+
+  function handleVisibilityChange() {
+    if (!document.hidden) {
+      state.blurAttemptedSinceVisible = false;
+
+      if (state.pipMode === "auto" && isPipOpen()) {
         closePip();
-      } else {
-        await openPip();
       }
-    } catch (error) {
-      console.error("[Idleon PiP] Failed to toggle PiP:", error);
-      alert(`[Idleon PiP] Failed to toggle PiP: ${error?.message || error}`);
+
+      return;
+    }
+
+    if (state.blurAttemptedSinceVisible) return;
+    state.blurAttemptedSinceVisible = true;
+
+    if (!isPipOpen()) {
+      void openPip({
+        mode: "auto",
+        suppressErrors: true,
+      });
     }
   }
 
   window.__idleonTogglePip = togglePip;
+  window.__idleonRevealPipControl = revealPipControl;
+
+  window.addEventListener("keydown", handleRestoreShortcut);
+  document.addEventListener("visibilitychange", handleVisibilityChange);
 
   waitForBodyAndInject();
 
