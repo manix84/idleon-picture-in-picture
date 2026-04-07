@@ -111,7 +111,7 @@ See [privacy.md](./privacy.md)
 
 - /src  
   - content.js  
- - background.js  
+  - background.js  
 - /icons  
   - icon16.png  
   - icon32.png  
