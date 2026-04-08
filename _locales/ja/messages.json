@@ -1,0 +1,74 @@
+{
+  "extName": {
+    "message": "Idleon PiP"
+  },
+  "extShortName": {
+    "message": "Idleon PiP"
+  },
+  "extDescription": {
+    "message": "Legends of Idleon を常に手前に表示される小さなピクチャーインピクチャーウィンドウで実行します。"
+  },
+  "actionTitle": {
+    "message": "Idleon PiP を切り替え"
+  },
+  "commandRevealControl": {
+    "message": "Idleon PiP コントロールを表示"
+  },
+  "statusReady": {
+    "message": "準備完了。"
+  },
+  "unsupportedBrowser": {
+    "message": "このブラウザは Document Picture-in-Picture に対応していません。"
+  },
+  "buttonOpenPip": {
+    "message": "Idleon PiP を開く"
+  },
+  "buttonClosePip": {
+    "message": "Idleon PiP を閉じる"
+  },
+  "buttonTooltip": {
+    "message": "Idleon のピクチャーインピクチャーを開閉します。このボタンを右クリックすると非表示になります。"
+  },
+  "overlayTitle": {
+    "message": "ゲームがピクチャーインピクチャーに移動しました"
+  },
+  "overlayBody": {
+    "message": "PiP ウィンドウを閉じるとゲームがページに戻ります"
+  },
+  "toastButtonHidden": {
+    "message": "Idleon PiP ボタンを非表示にしました。Ctrl/Cmd+Shift+P で復元できます。"
+  },
+  "toastButtonRestored": {
+    "message": "Idleon PiP ボタンを復元しました"
+  },
+  "toastClickButton": {
+    "message": "ピクチャーインピクチャーを開くには Idleon PiP ボタンをクリックしてください"
+  },
+  "errorBlockedTitle": {
+    "message": "Chrome によりピクチャーインピクチャーがブロックされました"
+  },
+  "errorBlockedAutoBody": {
+    "message": "Chrome では、PiP ボタンや拡張機能アイコンのクリックなど、ユーザーの直接操作があった場合にのみこの PiP ウィンドウを開けます。拡張機能は動作していますが、ブラウザが自動オープンを拒否しました。"
+  },
+  "errorBlockedManualBody": {
+    "message": "Chrome では、この PiP ウィンドウを開く前にユーザーの直接操作が必要です。ページ上の PiP ボタンまたは拡張機能アイコンをクリックしてください。"
+  },
+  "errorUnavailableTitle": {
+    "message": "ピクチャーインピクチャーは利用できません"
+  },
+  "errorUnavailableBody": {
+    "message": "このブラウザ、またはブラウザ設定では、このページで Document Picture-in-Picture を現在利用できません。"
+  },
+  "errorFailedTitle": {
+    "message": "ピクチャーインピクチャーに失敗しました"
+  },
+  "errorUnknownBody": {
+    "message": "Chrome が不明な理由で PiP リクエストを拒否しました。"
+  },
+  "errorMissingContainer": {
+    "message": "$1 が見つかりませんでした"
+  },
+  "errorMissingParent": {
+    "message": "ゲームコンテナに親ノードがありません。"
+  }
+}

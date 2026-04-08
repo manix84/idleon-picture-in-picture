@@ -1,0 +1,74 @@
+{
+  "extName": {
+    "message": "Idleon PiP"
+  },
+  "extShortName": {
+    "message": "Idleon PiP"
+  },
+  "extDescription": {
+    "message": "在一个始终置顶的小画中画窗口中运行 Legends of Idleon。"
+  },
+  "actionTitle": {
+    "message": "切换 Idleon PiP"
+  },
+  "commandRevealControl": {
+    "message": "显示 Idleon PiP 控件"
+  },
+  "statusReady": {
+    "message": "就绪。"
+  },
+  "unsupportedBrowser": {
+    "message": "此浏览器不支持 Document Picture-in-Picture。"
+  },
+  "buttonOpenPip": {
+    "message": "打开 Idleon PiP"
+  },
+  "buttonClosePip": {
+    "message": "关闭 Idleon PiP"
+  },
+  "buttonTooltip": {
+    "message": "打开或关闭 Idleon 的画中画。右键点击可隐藏此按钮。"
+  },
+  "overlayTitle": {
+    "message": "游戏已移至画中画窗口"
+  },
+  "overlayBody": {
+    "message": "关闭 PiP 窗口即可将游戏返回到页面中"
+  },
+  "toastButtonHidden": {
+    "message": "Idleon PiP 按钮已隐藏。按 Ctrl/Cmd+Shift+P 可恢复。"
+  },
+  "toastButtonRestored": {
+    "message": "Idleon PiP 按钮已恢复"
+  },
+  "toastClickButton": {
+    "message": "点击 Idleon PiP 按钮以打开画中画"
+  },
+  "errorBlockedTitle": {
+    "message": "Chrome 阻止了画中画"
+  },
+  "errorBlockedAutoBody": {
+    "message": "Chrome 只允许在用户直接操作后打开此 PiP 窗口，例如点击 PiP 按钮或扩展图标。扩展本身工作正常，但浏览器拒绝了自动打开。"
+  },
+  "errorBlockedManualBody": {
+    "message": "Chrome 只允许在用户直接操作后打开此 PiP 窗口。请尝试点击页面上的 PiP 按钮或扩展图标。"
+  },
+  "errorUnavailableTitle": {
+    "message": "画中画不可用"
+  },
+  "errorUnavailableBody": {
+    "message": "当前浏览器或浏览器设置不允许在此页面使用 Document Picture-in-Picture。"
+  },
+  "errorFailedTitle": {
+    "message": "画中画失败"
+  },
+  "errorUnknownBody": {
+    "message": "Chrome 因未知原因拒绝了 PiP 请求。"
+  },
+  "errorMissingContainer": {
+    "message": "找不到 $1"
+  },
+  "errorMissingParent": {
+    "message": "游戏容器没有父节点。"
+  }
+}

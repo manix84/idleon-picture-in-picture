@@ -1,0 +1,74 @@
+{
+  "extName": {
+    "message": "Idleon PiP"
+  },
+  "extShortName": {
+    "message": "Idleon PiP"
+  },
+  "extDescription": {
+    "message": "Starte Legends of Idleon in einem kleinen, immer im Vordergrund bleibenden Picture-in-Picture-Fenster."
+  },
+  "actionTitle": {
+    "message": "Idleon PiP umschalten"
+  },
+  "commandRevealControl": {
+    "message": "Idleon-PiP-Steuerung anzeigen"
+  },
+  "statusReady": {
+    "message": "Bereit."
+  },
+  "unsupportedBrowser": {
+    "message": "Document Picture-in-Picture wird in diesem Browser nicht unterstützt."
+  },
+  "buttonOpenPip": {
+    "message": "Idleon PiP öffnen"
+  },
+  "buttonClosePip": {
+    "message": "Idleon PiP schließen"
+  },
+  "buttonTooltip": {
+    "message": "Picture-in-Picture für Idleon öffnen oder schließen. Mit Rechtsklick wird diese Schaltfläche ausgeblendet."
+  },
+  "overlayTitle": {
+    "message": "Spiel in Picture-in-Picture verschoben"
+  },
+  "overlayBody": {
+    "message": "Schließe das PiP-Fenster, um das Spiel zur Seite zurückzubringen"
+  },
+  "toastButtonHidden": {
+    "message": "Idleon-PiP-Schaltfläche ausgeblendet. Drücke Strg/Cmd+Umschalt+P, um sie wiederherzustellen."
+  },
+  "toastButtonRestored": {
+    "message": "Idleon-PiP-Schaltfläche wiederhergestellt"
+  },
+  "toastClickButton": {
+    "message": "Klicke auf die Idleon-PiP-Schaltfläche, um Picture-in-Picture zu öffnen"
+  },
+  "errorBlockedTitle": {
+    "message": "Chrome hat Picture-in-Picture blockiert"
+  },
+  "errorBlockedAutoBody": {
+    "message": "Chrome erlaubt das Öffnen dieses PiP-Fensters nur nach einer direkten Benutzeraktion, zum Beispiel einem Klick auf die PiP-Schaltfläche oder das Erweiterungssymbol. Die Erweiterung funktioniert, aber der Browser hat das automatische Öffnen abgelehnt."
+  },
+  "errorBlockedManualBody": {
+    "message": "Chrome erlaubt das Öffnen dieses PiP-Fensters nur nach einer direkten Benutzeraktion. Bitte versuche, auf die PiP-Schaltfläche auf der Seite oder auf das Erweiterungssymbol zu klicken."
+  },
+  "errorUnavailableTitle": {
+    "message": "Picture-in-Picture ist nicht verfügbar"
+  },
+  "errorUnavailableBody": {
+    "message": "Dieser Browser oder diese Browsereinstellung erlaubt Document Picture-in-Picture auf dieser Seite derzeit nicht."
+  },
+  "errorFailedTitle": {
+    "message": "Picture-in-Picture fehlgeschlagen"
+  },
+  "errorUnknownBody": {
+    "message": "Chrome hat die PiP-Anfrage aus einem unbekannten Grund abgelehnt."
+  },
+  "errorMissingContainer": {
+    "message": "$1 konnte nicht gefunden werden"
+  },
+  "errorMissingParent": {
+    "message": "Der Spiel-Container hat kein übergeordnetes Element."
+  }
+}
