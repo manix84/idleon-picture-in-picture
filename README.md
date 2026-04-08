@@ -113,7 +113,19 @@ Supported languages:
 
 The extension will automatically use your browser’s language where available.
 
-These languages were chosen to keep it in line with those supported by Legends of Idleon. If you'd like me to add any more, just let me know.
+These languages were chosen to keep it in line with those supported by Legends of Idleon. If you'd like me to add any more, just let me know, or contribute...
+
+### 🧠 Contributing to Languages
+
+Translations are simple JSON files located in:
+
+```
+_locales/<locale>/messages.json
+```
+
+If you’d like to improve an existing translation or add a new language, feel free to open a PR!
+
+Please keep message keys consistent across all locale files.
 
 ---
 
