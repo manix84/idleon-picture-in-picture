@@ -124,6 +124,8 @@ See [privacy.md](./privacy.md)
     - messages.json
   - zh_CN/
     - messages.json
+  - zh_TW/
+    - messages.json
 - src/
   - content.js
   - background.js
