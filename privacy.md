@@ -1,7 +1,7 @@
 # Privacy Policy for Idleon PiP
 
-**Last updated:** 27th March 2026
-**Version:** 1.0.1
+**Last updated:** 8th April 2026
+**Version:** 1.1.0
 
 ---
 
