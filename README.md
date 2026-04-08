@@ -109,15 +109,30 @@ See [privacy.md](./privacy.md)
 
 ## 📦 Project Structure
 
-- /src  
-  - content.js  
-  - background.js  
-- /icons  
-  - icon16.png  
-  - icon32.png  
-  - icon48.png  
-  - icon128.png  
-- manifest.json  
+- \_locales/
+  - en_GB/
+    - messages.json
+  - en_US/
+    - messages.json
+  - fr/
+    - messages.json
+  - de/
+    - messages.json
+  - ko/
+    - messages.json
+  - ja/
+    - messages.json
+  - zh_CN/
+    - messages.json
+- src/
+  - content.js
+  - background.js
+- icons/
+  - icon16.png
+  - icon32.png
+  - icon48.png
+  - icon128.png
+- manifest.json
 
 ---
 

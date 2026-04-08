@@ -1,0 +1,74 @@
+{
+  "extName": {
+    "message": "Idleon PiP"
+  },
+  "extShortName": {
+    "message": "Idleon PiP"
+  },
+  "extDescription": {
+    "message": "在一個始終置頂的小型子母畫面視窗中執行 Legends of Idleon。"
+  },
+  "actionTitle": {
+    "message": "切換 Idleon PiP"
+  },
+  "commandRevealControl": {
+    "message": "顯示 Idleon PiP 控制項"
+  },
+  "statusReady": {
+    "message": "就緒。"
+  },
+  "unsupportedBrowser": {
+    "message": "此瀏覽器不支援 Document Picture-in-Picture。"
+  },
+  "buttonOpenPip": {
+    "message": "開啟 Idleon PiP"
+  },
+  "buttonClosePip": {
+    "message": "關閉 Idleon PiP"
+  },
+  "buttonTooltip": {
+    "message": "開啟或關閉 Idleon 的子母畫面。按右鍵可隱藏此按鈕。"
+  },
+  "overlayTitle": {
+    "message": "遊戲已移至子母畫面視窗"
+  },
+  "overlayBody": {
+    "message": "關閉 PiP 視窗即可將遊戲返回頁面"
+  },
+  "toastButtonHidden": {
+    "message": "Idleon PiP 按鈕已隱藏。按 Ctrl/Cmd+Shift+P 可還原。"
+  },
+  "toastButtonRestored": {
+    "message": "Idleon PiP 按鈕已還原"
+  },
+  "toastClickButton": {
+    "message": "點擊 Idleon PiP 按鈕以開啟子母畫面"
+  },
+  "errorBlockedTitle": {
+    "message": "Chrome 已封鎖子母畫面"
+  },
+  "errorBlockedAutoBody": {
+    "message": "Chrome 只允許在使用者直接操作後開啟此 PiP 視窗，例如點擊 PiP 按鈕或擴充功能圖示。擴充功能本身運作正常，但瀏覽器拒絕了自動開啟。"
+  },
+  "errorBlockedManualBody": {
+    "message": "Chrome 只允許在使用者直接操作後開啟此 PiP 視窗。請嘗試點擊頁面上的 PiP 按鈕或擴充功能圖示。"
+  },
+  "errorUnavailableTitle": {
+    "message": "子母畫面不可用"
+  },
+  "errorUnavailableBody": {
+    "message": "目前的瀏覽器或瀏覽器設定不允許在此頁面使用 Document Picture-in-Picture。"
+  },
+  "errorFailedTitle": {
+    "message": "子母畫面失敗"
+  },
+  "errorUnknownBody": {
+    "message": "Chrome 因未知原因拒絕了 PiP 請求。"
+  },
+  "errorMissingContainer": {
+    "message": "找不到 $1"
+  },
+  "errorMissingParent": {
+    "message": "遊戲容器沒有父節點。"
+  }
+}
