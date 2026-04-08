@@ -28,8 +28,11 @@ Idleon PiP does **not collect any data**, including:
 - Financial or payment information
 - Health or sensitive data
 - User activity or analytics
+- Browser language or localisation preferences
 
 There is **no tracking of any kind**.
+
+The extension uses Chrome’s built-in internationalisation (i18n) system locally. No language data is collected or transmitted.
 
 ---
 
