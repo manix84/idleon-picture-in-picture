@@ -97,6 +97,26 @@ See [privacy.md](./privacy.md)
 
 ---
 
+## 🌍 Languages
+
+Idleon PiP now supports multiple languages via Chrome’s built-in localisation system.
+
+Supported languages:
+- English (UK)
+- English (US)
+- French
+- German
+- Korean
+- Japanese
+- Chinese (Simplified)
+- Chinese (Traditional)
+
+The extension will automatically use your browser’s language where available.
+
+These languages were chosen to keep it in line with those supported by Legends of Idleon. If you'd like me to add any more, just let me know.
+
+---
+
 ## 🛠️ Installation (Development)
 
 1. Clone the repository
