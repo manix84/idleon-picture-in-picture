@@ -8,6 +8,22 @@ Play **Legends of Idleon** in Picture-in-Picture mode while browsing, working, o
 
 ---
 
+## 🧩 Install from Chrome Web Store
+
+👉 https://chromewebstore.google.com/detail/idleon-pip/genkdpliffdkinghiceifmkoiglfomod
+
+---
+
+## 📸 Screenshots
+
+<p align="center">
+  <a href="https://lh3.googleusercontent.com/fQk_ctzUYrghGTv30XYLdNcm_ONm6cN857KWLcKufA1Qi4AdmOkPVG0kN9oHReA55rzROSATohlHfeUZCjwHH_Nltg=s1600-w1600-h1000" target="_blank" rel="noopener noreferrer"><img src="https://lh3.googleusercontent.com/fQk_ctzUYrghGTv30XYLdNcm_ONm6cN857KWLcKufA1Qi4AdmOkPVG0kN9oHReA55rzROSATohlHfeUZCjwHH_Nltg=s1600-w1600-h1000" alt="Idleon PiP Screenshot 1" width="30%" /></a>
+  <a href="https://lh3.googleusercontent.com/PGB43TZRpOpvVgJgCpk-ZwAR1wQGmDlKJ5OKWavQcjHo_2-U9IEa2SHbDB1x6ZO8qvt7E60Q8vklWg63TsGEqJIz=s1600-w1600-h1000" target="_blank" rel="noopener noreferrer"><img src="https://lh3.googleusercontent.com/PGB43TZRpOpvVgJgCpk-ZwAR1wQGmDlKJ5OKWavQcjHo_2-U9IEa2SHbDB1x6ZO8qvt7E60Q8vklWg63TsGEqJIz=s1600-w1600-h1000" alt="Idleon PiP Screenshot 2" width="30%" /></a>
+  <a href="https://lh3.googleusercontent.com/4eh82hJfb2SVLCnYduYlAMJfsgEfLZsGZjEBophRnmajpHDZ9OzqZA-44ZGWErXigqI0_vuMSgscHZQz6EHO29_8O2o=s1600-w1600-h1000" target="_blank" rel="noopener noreferrer"><img src="https://lh3.googleusercontent.com/4eh82hJfb2SVLCnYduYlAMJfsgEfLZsGZjEBophRnmajpHDZ9OzqZA-44ZGWErXigqI0_vuMSgscHZQz6EHO29_8O2o=s1600-w1600-h1000" alt="Idleon PiP Screenshot 3" width="30%" /></a>
+</p>
+
+---
+
 ## ✨ Features
 
 - 🎮 One-click Picture-in-Picture mode
@@ -25,17 +41,17 @@ Play **Legends of Idleon** in Picture-in-Picture mode while browsing, working, o
 
 ### Open PiP
 
-- Click the extension icon
-  **or**
+- Click the extension icon  
+  **or**  
 - Click the floating button (bottom-right of the page)
 
 ---
 
 ### Close PiP
 
-- Click the extension icon again
-- Click the floating button
-- Close the PiP window directly
+- Click the extension icon again  
+- Click the floating button  
+- Close the PiP window directly  
 
 ---
 
@@ -43,12 +59,12 @@ Play **Legends of Idleon** in Picture-in-Picture mode while browsing, working, o
 
 ### Reveal PiP Controls
 
-Ctrl + Shift + Y
+Ctrl + Shift + Y  
 Cmd + Shift + Y (Mac)
 
-- Restores the floating button if hidden
-- Highlights the button
-- Prompts you to click it
+- Restores the floating button if hidden  
+- Highlights the button  
+- Prompts you to click it  
 
 👉 Due to browser security restrictions, PiP cannot reliably be opened directly via keyboard shortcut.
 
@@ -56,7 +72,7 @@ Cmd + Shift + Y (Mac)
 
 ### Restore Hidden Button
 
-Ctrl + Shift + P
+Ctrl + Shift + P  
 Cmd + Shift + P (Mac)
 
 ---
@@ -65,8 +81,8 @@ Cmd + Shift + P (Mac)
 
 A small button appears in the bottom-right corner:
 
-- Click → Toggle PiP
-- Right-click → Hide button
+- Click → Toggle PiP  
+- Right-click → Hide button  
 
 If hidden, use the shortcut above to restore it.
 
@@ -76,8 +92,8 @@ If hidden, use the shortcut above to restore it.
 
 Idleon PiP attempts to open PiP automatically when you switch tabs.
 
-- If PiP was auto-opened → it closes when you return
-- If PiP was manually opened → it stays open
+- If PiP was auto-opened → it closes when you return  
+- If PiP was manually opened → it stays open  
 
 ⚠️ This feature is limited by browser security policies and may not always trigger.
 
@@ -87,9 +103,9 @@ Idleon PiP attempts to open PiP automatically when you switch tabs.
 
 Idleon PiP:
 
-- ❌ Does NOT collect data
-- ❌ Does NOT track users
-- ❌ Does NOT communicate with servers
+- ❌ Does NOT collect data  
+- ❌ Does NOT track users  
+- ❌ Does NOT communicate with servers  
 
 Everything runs locally in your browser.
 
@@ -102,20 +118,22 @@ See [privacy.md](./privacy.md)
 Idleon PiP now supports multiple languages via Chrome’s built-in localisation system.
 
 Supported languages:
-- English (UK)
-- English (US)
-- French
-- German
-- Korean
-- Japanese
-- Chinese (Simplified)
-- Chinese (Traditional)
+- English (UK)  
+- English (US)  
+- French  
+- German  
+- Korean  
+- Japanese  
+- Chinese (Simplified)  
+- Chinese (Traditional)  
 
 The extension will automatically use your browser’s language where available.
 
-These languages were chosen to keep it in line with those supported by Legends of Idleon. If you'd like me to add any more, just let me know, or contribute...
+These languages were chosen to keep it in line with those supported by Legends of Idleon. If you'd like more added, feel free to contribute!
 
-### 🧠 Contributing to Languages
+---
+
+## 🧠 Contributing to Languages
 
 Translations are simple JSON files located in:
 
@@ -131,33 +149,25 @@ Please keep message keys consistent across all locale files.
 
 ## 🛠️ Installation (Development)
 
-1. Clone the repository
-2. Open Chrome → `chrome://extensions/`
-3. Enable **Developer mode**
-4. Click **Load unpacked**
-5. Select the project folder
+1. Clone the repository  
+2. Open Chrome → `chrome://extensions/`  
+3. Enable **Developer mode**  
+4. Click **Load unpacked**  
+5. Select the project folder  
 
 ---
 
 ## 📦 Project Structure
 
-- \_locales/
-  - en_GB/
-    - messages.json
-  - en_US/
-    - messages.json
-  - fr/
-    - messages.json
-  - de/
-    - messages.json
-  - ko/
-    - messages.json
-  - ja/
-    - messages.json
-  - zh_CN/
-    - messages.json
-  - zh_TW/
-    - messages.json
+- _locales/
+  - en_GB/*messages.json*
+  - en_US/*messages.json*
+  - fr/*messages.json*
+  - de/*messages.json*
+  - ko/*messages.json*
+  - ja/*messages.json*
+  - zh_CN/*messages.json*
+  - zh_TW/*messages.json*
 - src/
   - content.js
   - background.js
@@ -172,10 +182,10 @@ Please keep message keys consistent across all locale files.
 
 ## ⚠️ Known Limitations
 
-- Chrome requires **direct user interaction** to open PiP
-- Keyboard shortcuts cannot reliably trigger PiP directly
-- Auto PiP may not work depending on browser state
-- PiP window size/position is controlled by Chrome
+- Chrome requires **direct user interaction** to open PiP  
+- Keyboard shortcuts cannot reliably trigger PiP directly  
+- Auto PiP may not work depending on browser state  
+- PiP window size/position is controlled by Chrome  
 
 ---
 
@@ -183,7 +193,7 @@ Please keep message keys consistent across all locale files.
 
 The extension:
 
-1. Injects a script into the Idleon page
-2. Moves the game container into a PiP window
-3. Preserves layout and styling
-4. Restores everything when PiP is closed
+1. Injects a script into the Idleon page  
+2. Moves the game container into a PiP window  
+3. Preserves layout and styling  
+4. Restores everything when PiP is closed  
