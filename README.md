@@ -1,4 +1,4 @@
-# Idleon PiP
+# Picture in Picture mode for Legends of Idleon
 
 [![Release Chrome Extension](https://github.com/manix84/idleon-picture-in-picture/actions/workflows/release-extension.yml/badge.svg)](https://github.com/manix84/idleon-picture-in-picture/actions/workflows/release-extension.yml)
 
