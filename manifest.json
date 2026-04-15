@@ -5,47 +5,61 @@
   "description": "__MSG_extDescription__",
   "version": "1.1.0",
   "default_locale": "en_GB",
-  "action": {
-    "default_title": "__MSG_actionTitle__",
-    "default_icon": {
-      "16": "icons/icon16.png",
-      "32": "icons/icon32.png",
-      "48": "icons/icon48.png",
-      "128": "icons/icon128.png"
-    }
-  },
-  "author": "Rob Taylor <manix84@gmail.com>",
-  "permissions": ["activeTab", "scripting"],
-  "host_permissions": [
-    "https://www.legendsofidleon.com/*",
-    "https://*.legendsofidleon.com/*"
-  ],
-  "background": {
-    "service_worker": "src/background.js"
-  },
-  "content_scripts": [
-    {
-      "matches": [
-        "https://www.legendsofidleon.com/*",
-        "https://*.legendsofidleon.com/*"
-      ],
-      "js": ["src/content.js"],
-      "run_at": "document_idle"
-    }
-  ],
+
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
+
+  "action": {
+    "default_title": "__MSG_extName__"
+  },
+
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+
+  "host_permissions": [
+    "*://*.idleon.com/*"
+  ],
+
+  "background": {
+    "service_worker": "src/background.js",
+    "scripts": ["src/background.js"]
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.idleon.com/*"],
+      "js": ["src/content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+
   "commands": {
     "toggle-pip": {
       "suggested_key": {
         "default": "Ctrl+Shift+Y",
         "mac": "Command+Shift+Y"
       },
-      "description": "__MSG_commandRevealControl__"
+      "description": "__MSG_commandTogglePipDescription__"
+    },
+    "restore-button": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+P",
+        "mac": "Command+Shift+P"
+      },
+      "description": "__MSG_commandRestoreButtonDescription__"
+    }
+  },
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "idleon-pip@manix84.github.io",
+      "strict_min_version": "148.0"
     }
   }
 }
