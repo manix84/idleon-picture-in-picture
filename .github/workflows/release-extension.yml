@@ -1,4 +1,4 @@
-name: Release Chrome Extension
+name: Release Browser Extensions
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
     inputs:
       force_release:
-        description: 'Force release even if the version did not increase'
+        description: "Force release even if the version did not increase"
         required: false
         default: false
         type: boolean
@@ -31,6 +31,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y jq zip
+
       - name: Read manifest versions
         id: versions
         shell: bash
@@ -46,6 +47,7 @@ jobs:
           echo "new_version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
           echo "Old version: $OLD_VERSION"
           echo "New version: $NEW_VERSION"
+
       - name: Decide whether to release
         id: decision
         shell: bash
@@ -58,11 +60,13 @@ jobs:
           echo "FORCE_RELEASE=$FORCE_RELEASE"
           echo "OLD_VERSION=$OLD_VERSION"
           echo "NEW_VERSION=$NEW_VERSION"
+
           if [ "$FORCE_RELEASE" = "true" ]; then
             echo "Manual force release requested."
             echo "should_release=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
+
           if dpkg --compare-versions "$NEW_VERSION" gt "$OLD_VERSION"; then
             echo "Version increased. Release will be created."
             echo "should_release=true" >> "$GITHUB_OUTPUT"
@@ -70,42 +74,50 @@ jobs:
             echo "Version did not increase. Release will be skipped."
             echo "should_release=false" >> "$GITHUB_OUTPUT"
           fi
+
       - name: Stop if no release is needed
         if: steps.decision.outputs.should_release != 'true'
         run: echo "No release needed."
 
-      - name: Set up Chrome
+      - name: Prepare release files
         if: steps.decision.outputs.should_release == 'true'
-        uses: browser-actions/setup-chrome@v1
+        shell: bash
+        run: |
+          set -euo pipefail
+          VERSION="${{ steps.versions.outputs.new_version }}"
 
-      - name: Restore signing key
+          mkdir -p build/tmp/common
+
+          rsync -av ./ build/tmp/common/ \
+            --exclude ".git" \
+            --exclude ".github" \
+            --exclude "build" \
+            --exclude "node_modules" \
+            --exclude "*.zip" \
+            --exclude "*.crx" \
+            --exclude ".DS_Store"
+
+          cp -R build/tmp/common build/tmp/chrome
+          cp -R build/tmp/common build/tmp/firefox
+
+      - name: Create Chrome ZIP artifact
         if: steps.decision.outputs.should_release == 'true'
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p /tmp/chrome-key
-          echo "${{ secrets.CHROME_EXTENSION_PEM_BASE64 }}" | base64 --decode > /tmp/chrome-key/extension.pem
-          chmod 600 /tmp/chrome-key/extension.pem
-      - name: Pack CRX
+          VERSION="${{ steps.versions.outputs.new_version }}"
+          cd build/tmp/chrome
+          zip -r "../../idleon-pip-chrome-v${VERSION}.zip" .
+
+      - name: Create Firefox ZIP artifact
         if: steps.decision.outputs.should_release == 'true'
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p build
-          chrome \
-            --headless=new \
-            --disable-gpu \
-            --no-sandbox \
-            --pack-extension="$GITHUB_WORKSPACE" \
-            --pack-extension-key="/tmp/chrome-key/extension.pem"
-          mv "$GITHUB_WORKSPACE.crx" "build/idleon-pip-${{ steps.versions.outputs.new_version }}.crx"
-      - name: Create ZIP artifact
-        if: steps.decision.outputs.should_release == 'true'
-        shell: bash
-        run: |
-          set -euo pipefail
-          zip -r "build/idleon-pip-${{ steps.versions.outputs.new_version }}.zip" . \
-            -x ".git/*" ".github/*" "build/*"
+          VERSION="${{ steps.versions.outputs.new_version }}"
+          cd build/tmp/firefox
+          zip -r "../../idleon-pip-firefox-v${VERSION}.zip" .
+
       - name: Create GitHub release
         if: steps.decision.outputs.should_release == 'true'
         env:
@@ -115,8 +127,9 @@ jobs:
           set -euo pipefail
           VERSION="${{ steps.versions.outputs.new_version }}"
           TAG="v$VERSION"
+
           gh release create "$TAG" \
             --title "$TAG" \
             --notes "Release $TAG" \
-            "build/idleon-pip-$VERSION.crx" \
-            "build/idleon-pip-$VERSION.zip"
+            "build/idleon-pip-chrome-v$VERSION.zip" \
+            "build/idleon-pip-firefox-v$VERSION.zip"
