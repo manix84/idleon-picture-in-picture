@@ -1,16 +1,43 @@
 # Picture in Picture mode for Legends of Idleon
 
-[![Release Chrome Extension](https://github.com/manix84/idleon-picture-in-picture/actions/workflows/release-extension.yml/badge.svg)](https://github.com/manix84/idleon-picture-in-picture/actions/workflows/release-extension.yml)
+[![Release Browser Extensions](https://github.com/manix84/idleon-picture-in-picture/actions/workflows/release-extension.yml/badge.svg)](https://github.com/manix84/idleon-picture-in-picture/actions/workflows/release-extension.yml)
 
 Play **Legends of Idleon** in Picture-in-Picture mode while browsing, working, or doing literally anything else.
 
-> A lightweight Chrome extension for playing Idleon in Picture-in-Picture.
+> A lightweight browser extension for playing Idleon in Picture-in-Picture.
 
 ---
 
-## 🧩 Install from Chrome Web Store
+## 🧩 Install
+
+### 🌐 Chrome (Recommended)
 
 👉 https://chromewebstore.google.com/detail/idleon-pip/genkdpliffdkinghiceifmkoiglfomod
+
+---
+
+### 🦊 Firefox (Experimental)
+
+Firefox support is available, but currently depends on experimental browser features.
+
+👉 Download the latest release from GitHub:  
+https://github.com/manix84/idleon-picture-in-picture/releases
+
+#### Installation steps
+
+1. Download the **Firefox ZIP** from the latest release  
+2. Open Firefox and go to `about:debugging#/runtime/this-firefox`  
+3. Click **Load Temporary Add-on**  
+4. Select the extension’s `manifest.json`
+
+#### ⚠️ Required setting
+
+You may need to enable Document Picture-in-Picture manually:
+
+```
+about:config → dom.documentpip.enabled → true
+```
+
 
 ---
 
@@ -26,14 +53,14 @@ Play **Legends of Idleon** in Picture-in-Picture mode while browsing, working, o
 
 ## ✨ Features
 
-- 🎮 One-click Picture-in-Picture mode
-- 🪟 Always-on-top floating game window
-- ⚡ Lightweight and fast (no dependencies)
-- 🧠 Remembers PiP window size/position (handled by Chrome)
-- 🎯 Runs only on the Idleon website
-- 🖱️ Optional floating control button
-- ⌨️ Keyboard shortcuts for quick access
-- 🧼 Automatically restores the page when PiP closes
+- 🎮 One-click Picture-in-Picture mode  
+- 🪟 Always-on-top floating game window  
+- ⚡ Lightweight and fast (no dependencies)  
+- 🧠 Remembers PiP window size/position (handled by the browser)  
+- 🎯 Runs only on the Idleon website  
+- 🖱️ Optional floating control button  
+- ⌨️ Keyboard shortcuts for quick access  
+- 🧼 Automatically restores the page when PiP closes  
 
 ---
 
@@ -43,7 +70,7 @@ Play **Legends of Idleon** in Picture-in-Picture mode while browsing, working, o
 
 - Click the extension icon  
   **or**  
-- Click the floating button (bottom-right of the page)
+- Click the floating button (bottom-right of the page)  
 
 ---
 
@@ -115,7 +142,7 @@ See [privacy.md](./privacy.md)
 
 ## 🌍 Languages
 
-Idleon PiP now supports multiple languages via Chrome’s built-in localisation system.
+Idleon PiP supports multiple languages via built-in browser localisation.
 
 Supported languages:
 - English (UK)  
@@ -129,7 +156,7 @@ Supported languages:
 
 The extension will automatically use your browser’s language where available.
 
-These languages were chosen to keep it in line with those supported by Legends of Idleon. If you'd like more added, feel free to contribute!
+These languages were chosen to match those supported by Legends of Idleon. Contributions are welcome!
 
 ---
 
@@ -141,6 +168,7 @@ Translations are simple JSON files located in:
 _locales/<locale>/messages.json
 ```
 
+
 If you’d like to improve an existing translation or add a new language, feel free to open a PR!
 
 Please keep message keys consistent across all locale files.
@@ -150,10 +178,13 @@ Please keep message keys consistent across all locale files.
 ## 🛠️ Installation (Development)
 
 1. Clone the repository  
-2. Open Chrome → `chrome://extensions/`  
-3. Enable **Developer mode**  
-4. Click **Load unpacked**  
-5. Select the project folder  
+2. Open your browser’s extension page:  
+   - Chrome → `chrome://extensions/`  
+   - Firefox → `about:debugging#/runtime/this-firefox`  
+3. Enable developer mode  
+4. Load the extension:
+   - Chrome → **Load unpacked**  
+   - Firefox → **Load Temporary Add-on** → select `manifest.json`
 
 ---
 
@@ -182,10 +213,11 @@ Please keep message keys consistent across all locale files.
 
 ## ⚠️ Known Limitations
 
-- Chrome requires **direct user interaction** to open PiP  
+- Browsers require **direct user interaction** to open PiP  
 - Keyboard shortcuts cannot reliably trigger PiP directly  
 - Auto PiP may not work depending on browser state  
-- PiP window size/position is controlled by Chrome  
+- PiP window size/position is controlled by the browser  
+- Firefox support depends on experimental features  
 
 ---
 
